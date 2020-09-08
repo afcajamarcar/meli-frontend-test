@@ -35,19 +35,26 @@ export const formatSearchResult = (data) => {
 
 
 export const formatItemSearchResult = (itemData, descData) => {
+
     const formattedRes = {
         author: {
             name: process.env.AUTHOR_NAME || 'Andres',
             lastname: process.env.AUTHOR_LASTNAME || 'Cajamarca'
         },
         item: {
-
+            id: itemData.id,
+            title: itemData.title,
+            price: {
+                currency: itemData.currency_id,
+                amount: itemData.available_quantity,
+                decimals: itemData.price
+            }
         },
-        picture: '',
-        condition: '',
-        free_shipping: '',
-        sold_quantity: '',
-        description: ''
+        picture: itemData.thumbnail,
+        condition: itemData.condition,
+        free_shipping: itemData.shipping.free_shipping,
+        sold_quantity: itemData.sold_quantity,
+        description: descData.plain_text
     }
     return formattedRes;
 };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { formatSearchResult } from '../services/formatterService';
+import { formatSearchResult, formatItemSearchResult } from '../services/formatterService';
 
 export const handleSearchAction = (req, res) => {
     const query = req.query.q;
@@ -25,10 +25,19 @@ export const handleItemSearchAction = (req, res) => {
   if (id) {
     (async () => {
       try {
+        const itemReqOptions = {
+          method: 'get',
+          baseURL: `http://api.mercadolibre.com/items/${id}`,
+        }
         const itemRes = 
-          await axios.get(`https://api.mercadolibre.com/items/​${encodeURIComponent(id)}`);
+          await axios.get('', itemReqOptions);
+
+        const itemDescReqOptions = {
+          method: 'get',
+          baseURL: `http://api.mercadolibre.com/items/${id}/description`,
+        }  
         const itemDescRes = 
-          await axios.get(`https://api.mercadolibre.com/items/​${encodeURIComponent(id)}/description`);
+          await axios.get('', itemDescReqOptions);
         const formattedRes = formatItemSearchResult(itemRes.data, itemDescRes.data);
         return res.status(200).json(formattedRes);
       } catch (error) {
