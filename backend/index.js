@@ -5,7 +5,7 @@ dotenv.config();
 
 const app = express();
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 
 app.listen(port, function () {
     console.log(`Backend running on port ${port}!`);
