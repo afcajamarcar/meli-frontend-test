@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-import dotenv from 'dotenv';
-dotenv.config();
-
 import { formatSearchResult } from '../services/formatterService';
 
 export const handleSearchAction = (req, res) => {
@@ -21,4 +18,23 @@ export const handleSearchAction = (req, res) => {
             }
           })();
     }
+};
+
+export const handleItemSearchAction = (req, res) => {
+  const id = req.params.id;
+  if (id) {
+    (async () => {
+      try {
+        const itemRes = 
+          await axios.get(`https://api.mercadolibre.com/items/​${encodeURIComponent(id)}`);
+        const itemDescRes = 
+          await axios.get(`https://api.mercadolibre.com/items/​${encodeURIComponent(id)}/description`);
+        const formattedRes = formatItemSearchResult(itemRes.data, itemDescRes.data);
+        return res.status(200).json(formattedRes);
+      } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Oops... Something bad happened!'});
+      }
+    })();
+  }
 };

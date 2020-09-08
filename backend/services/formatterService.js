@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 export const formatSearchResult = (data) => {
     const categoryFilter = data.available_filters.find(filter => filter.id == 'category') ||
         data.filters.find(filter => filter.id == 'category');
@@ -29,3 +32,22 @@ export const formatSearchResult = (data) => {
     }
     return formattedRes;
 }
+
+
+export const formatItemSearchResult = (itemData, descData) => {
+    const formattedRes = {
+        author: {
+            name: process.env.AUTHOR_NAME || 'Andres',
+            lastname: process.env.AUTHOR_LASTNAME || 'Cajamarca'
+        },
+        item: {
+
+        },
+        picture: '',
+        condition: '',
+        free_shipping: '',
+        sold_quantity: '',
+        description: ''
+    }
+    return formattedRes;
+};
