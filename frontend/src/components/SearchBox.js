@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import logoML from '../assets/images/logo_ml.png';
 import iconSearch from '../assets/images/ic_search.png';
