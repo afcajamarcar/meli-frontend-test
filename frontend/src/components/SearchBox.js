@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 
 import logoML from '../assets/images/logo_ml.png';
@@ -9,15 +9,18 @@ function useQuery() {
 }
 
 function SerachBox() {
+    const firstRender = useRef(true);
     const history = useHistory();
 
     const [item, setItem] = useState('');
     
     let query = useQuery();
     let searchQuery = query.get("search");
-    if (searchQuery && !item) {
-        setItem(searchQuery);
-    }
+
+    useEffect(() => {
+		if (firstRender.current) firstRender.current = false;
+		if (searchQuery) setItem(searchQuery);
+	}, [searchQuery]);
     
     const handleChange = (e) => {
         setItem(e.target.value);
