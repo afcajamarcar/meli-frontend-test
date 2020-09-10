@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import useSearchItems from '../../src/api/useSearchItems';
 import iconShipping from '../assets/images/ic_shipping.png';
 import { formatCurrency } from '../utils/misc/formatter';
+import loader from '../assets/loader.gif';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -27,7 +28,7 @@ function Results() {
         history.push({
             pathname: `/items/${itemId}`,
             state: {
-                categories: results.categories.join(' > '),
+                categories: results.categories.join(' > '), //send categories to detailed view
                 itemCategory: itemCategory
             }
         });
@@ -66,7 +67,9 @@ function Results() {
                     ))}
                 </div>
                 :
-                <div></div>
+                <div className='loader'>
+                    <img src={loader} alt="loader"/>
+                </div>
             }
 
         </div>

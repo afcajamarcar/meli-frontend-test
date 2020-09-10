@@ -10,7 +10,7 @@ export const handleSearchAction = (req, res) => {
               const response = 
                 await axios.get(`http://api.mercadolibre.com/sites/MLA/search?q=${encodeURIComponent(query)}`);
               
-              const formattedRes = formatSearchResult(response.data);
+              const formattedRes = formatSearchResult(response.data); // A service should handle the logic
               return res.status(200).json(formattedRes);
             } catch (error) {
               console.log(error);
@@ -38,7 +38,7 @@ export const handleItemSearchAction = (req, res) => {
         }  
         const itemDescRes = 
           await axios.get('', itemDescReqOptions);
-        const formattedRes = formatItemSearchResult(itemRes.data, itemDescRes.data);
+        const formattedRes = formatItemSearchResult(itemRes.data, itemDescRes.data); // A service should handle the logic
         return res.status(200).json(formattedRes);
       } catch (error) {
         console.log(error);

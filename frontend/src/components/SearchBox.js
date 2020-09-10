@@ -18,7 +18,7 @@ function SerachBox() {
     let searchQuery = query.get("search");
 
     useEffect(() => {
-		if (firstRender.current) firstRender.current = false;
+		if (firstRender.current) firstRender.current = false; // Avoid inifite re rendering
 		if (searchQuery) setItem(searchQuery);
 	}, [searchQuery]);
     
@@ -27,7 +27,7 @@ function SerachBox() {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent submit behavior to keep a single source of truth
         if (item) {
             history.push({
                 pathname: '/items',

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useGetProduct from '../api/useGetProduct';
 import { formatCurrency } from '../utils/misc/formatter';
+import loader from '../assets/loader.gif';
 
 function Product(props) {
     const itemId = props.match.params.id;
@@ -19,7 +20,8 @@ function Product(props) {
 
     return (
         <div>
-            {product && product.item &&
+            {product && product.item
+                ?
                 <div>
                     <div className='item-categories-container'>
                         {itemCategory || categories || ''}
@@ -51,6 +53,10 @@ function Product(props) {
                             <div className='description'>{product.description}</div>
                         </div>
                     </div>
+                </div>
+                :
+                <div className='loader'>
+                    <img src={loader} alt="loader" />
                 </div>
             }
         </div>

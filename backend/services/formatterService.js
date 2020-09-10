@@ -2,12 +2,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const formatSearchResult = (data) => {
+    // Category info usually appears first in either filter or available_filters
+    // so one could handle the data in an optimistic way
     const categoryFilter = data.filters.length && data.filters[0].id === 'category' 
         ? data.filters[0]
         : data.available_filters.length && data.available_filters[0].id === 'category' 
         ? data.available_filters[0]
         : [];
-
+    
+    // When no breadcrumb data is available, send the name of the first category
     const categoriesNames = (categoryFilter && categoryFilter.values[0] && 
         categoryFilter.values[0].path_from_root &&
         categoryFilter.values[0].path_from_root.map(value => value.name)) 
@@ -16,6 +19,7 @@ export const formatSearchResult = (data) => {
     
     const items = [];
     data.results.slice(0, 4).forEach(item => {
+        // Get item specific category to show in detailed view
         const itemCategory = categoryFilter.values.find(
             category => category.id == item.category_id
         );
@@ -30,8 +34,8 @@ export const formatSearchResult = (data) => {
             picture: item.thumbnail,
             condition: item.condition,
             free_shipping: item.shipping.free_shipping,
-            category: itemCategory && itemCategory.name || '',
-            location: item.address.state_name
+            category: itemCategory && itemCategory.name || '', // specific category of item
+            location: item.address.state_name // location appears in design specs
         });
     });
     const formattedRes = {

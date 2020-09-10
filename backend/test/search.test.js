@@ -1,5 +1,11 @@
+/* 
+* Andres Cajamarca - 2020
+* I decided to wrote a couple of integration tests in order to assure
+* quality in the data that will be send to the front
+*/
+
 import { server } from '../index';
-import 'regenerator-runtime/runtime.js';
+import 'regenerator-runtime/runtime.js'; // Crucial import to mock async functions in test env
 
 import request from 'supertest';
 
@@ -7,7 +13,7 @@ import chai from 'chai';
 const assert = chai.assert;
 
 const query = 'apple ipad';
-const id = 'MLA865350814';
+const id = 'MLA865350814'; // Real item in db
 
 describe('Meli search API', () => {
     describe('do search of user input', () => {
