@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-const useSerachItems = itemId => {
+const useGetProduct = itemId => {
     console.log('will search specific items');
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
@@ -30,4 +30,4 @@ const useSerachItems = itemId => {
     return { response, error };
 }
 
-export default useSerachItems;
+export default useGetProduct;

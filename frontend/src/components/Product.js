@@ -1,24 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import useSearchItems from '../api/useGetItem';
+import useGetProduct from '../api/useGetProduct';
+import { formatCurrency } from '../utils/misc/formatter';
 
 function Product(props) {
     const itemId = props.match.params.id;
 
-    const [fetchedItem, setFetchedItem] = useState({});
+    const [product, setProduct] = useState({});
 
-    const getItem = useSearchItems(itemId);
+    const getItem = useGetProduct(itemId);
 
     useEffect(() => {
-        if (getItem.response) {
-            setFetchedItem(getItem.response);
-        }
+        if (getItem.response) setProduct(getItem.response);
     }, [getItem.response]);
-
-    console.log('fetching item...', fetchedItem);
 
     return (
         <div>
-            <h3>prodcuto!</h3>
+            {product && product.item &&
+                <div className='product-container'>
+                    <div className='product-card'>
+                        <div>
+                            <img src={product.picture} alt={product.name} />
+                        </div>
+                        <div className='product-info'>
+                            <div className='product-state'>
+                                {product.condition === 'new' ? 'Nuevo' : 'Usado'}
+                                {' - '}
+                                {`${product.sold_quantity} vendidos`}
+                            </div>
+                            <div className='product-name'>
+                                {product.item.title}
+                            </div>
+                            <div className='product-price'>
+                                {`$${formatCurrency(product.item.price.amount , product.item.price.decimals)}`}
+                            </div>
+                            <button>comprar</button>
+                        </div>
+                    </div>
+                    <div className='product-description'>
+                        <div className='title'>Descripción del producto</div>
+                        <p>{product.description}</p>
+                    </div>
+                </div>
+            }
         </div>
     );
 }

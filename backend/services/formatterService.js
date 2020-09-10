@@ -36,7 +36,6 @@ export const formatSearchResult = (data) => {
 
 
 export const formatItemSearchResult = (itemData, descData) => {
-
     const formattedRes = {
         author: {
             name: process.env.AUTHOR_NAME || 'Andres',
@@ -47,8 +46,8 @@ export const formatItemSearchResult = (itemData, descData) => {
             title: itemData.title,
             price: {
                 currency: itemData.currency_id,
-                amount: itemData.available_quantity,
-                decimals: itemData.price
+                amount: parseInt(itemData.price),
+                decimals: parseFloat((itemData.price % 1).toFixed(4))
             }
         },
         picture: itemData.thumbnail,

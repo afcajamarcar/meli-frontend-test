@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import useSearchItems from '../../src/api/useSearchItems';
 import iconShipping from '../assets/images/ic_shipping.png';
+import { formatCurrency } from '../utils/misc/formatter';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -21,10 +22,6 @@ function Results() {
             setResults(searchItems.response);
         }
     }, [searchItems.response]);
-
-    const formatPrice = (amount, decimals) => {
-        return new Intl.NumberFormat("es-ES").format(amount + decimals);
-    };
 
     const renderItem = (itemId) => {
         history.push({
@@ -52,7 +49,7 @@ function Results() {
                             </div>
                             <div className='right-side-card'>
                                 <div className='price-container'>
-                                    {`$ ${formatPrice(item.price.amount, item.price.decimals)}`}
+                                    {`$ ${formatCurrency(item.price.amount, item.price.decimals)}`}
                                 </div>
                                 {item.free_shipping &&
                                     <img src={iconShipping} alt="free_shipping" title="Envío gratis" />
