@@ -1,8 +1,9 @@
 @import './variables';
 @import './searchBox';
+@import './results';
 
 html, body {
-    height: 100%;
-    width: 100%;
+    // height: 100%;
+    // width: 100%;
     background-color: $meli-light-grey;
 }
