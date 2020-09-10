@@ -34,7 +34,12 @@ function SerachBox() {
                 search: `?search=${item}`
             });
         }
-    }
+    };
+
+    // navigate to home when click in meli's logo
+    const goToHome = () => {
+        history.push('/');
+    };
 
     return (
         <header className='header'>
@@ -44,6 +49,7 @@ function SerachBox() {
                     alt="logo_ml"
                     title="Mercado Libre - Donde comprar y vender de todo"
                     className='meli-logo'
+                    onClick={ () => goToHome()}
                 />
                 <form onSubmit={e => handleSubmit(e)} >
                     <input

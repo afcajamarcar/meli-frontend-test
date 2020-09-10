@@ -59,6 +59,7 @@ function Product(props) {
                     </div>
                 </div>
                 :
+                // a loader comes in hand to let the uset know that something is happening
                 <div className='loader'>
                     <img src={loader} alt="loader" />
                 </div>
