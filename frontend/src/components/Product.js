@@ -41,12 +41,14 @@ function Product(props) {
                                 <div className='product-price'>
                                     {`$${formatCurrency(product.item.price.amount, product.item.price.decimals)}`}
                                 </div>
-                                <button>Comprar</button>
+                                <div className='buy-button-container'>
+                                    <button>Comprar</button>
+                                </div>
                             </div>
                         </div>
                         <div className='product-description'>
                             <div className='title'>Descripción del producto</div>
-                            <p>{product.description}</p>
+                            <div className='description'>{product.description}</div>
                         </div>
                     </div>
                 </div>

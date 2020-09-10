@@ -12,6 +12,8 @@
 
         .product-info {
 
+            padding-left: 20%;
+
             .product-state {
                 padding: 32px 0px 16px 0px;
                 font-size: 14px;
@@ -19,6 +21,7 @@
 
             .product-name {
                 font-size: 32px;
+                padding-right: 10px;
             }
 
             .product-price {
@@ -26,23 +29,28 @@
                 font-size: 48px;
             }
 
+            .buy-button-container {
+                padding-right: 32px;
+            }
+
             button {
                 color: $white;
                 background-color: $meli-blue;
-                height: 32px;
+                height: 40px;
                 border-radius: 4px;
                 border: none;
+                width: 100%;
             }
         }
     }
 
     .product-description {
         .title {
-            padding: 0px 0px 32px 32px;
+            padding: 32px 0px 32px 32px;
             font-size: 28px;
         }
 
-        p {
+        .description {
             padding: 0px 0px 32px 32px;
             color: $meli-grey;
             font-size: 16px;

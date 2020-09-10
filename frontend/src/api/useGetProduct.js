@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const useGetProduct = itemId => {
-    console.log('will search specific items');
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
     useEffect(() => {
@@ -17,7 +16,6 @@ const useGetProduct = itemId => {
                     options
                 );
                 const data = await res.data;
-                console.log('data', data);
                 if (isSubscribed) setResponse(data);
             } catch (error) {
                 console.error('something happened', error);
