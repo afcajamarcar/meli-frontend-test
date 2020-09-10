@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useGetProduct from '../api/useGetProduct';
 import { formatCurrency } from '../utils/misc/formatter';
 import loader from '../assets/loader.gif';
+import iconShipping from '../assets/images/ic_shipping.png';
 
 function Product(props) {
     const itemId = props.match.params.id;
@@ -42,6 +43,9 @@ function Product(props) {
                                 </div>
                                 <div className='product-price'>
                                     {`$${formatCurrency(product.item.price.amount, product.item.price.decimals)}`}
+                                    {product.free_shipping &&
+                                        <img src={iconShipping} alt="free_shipping" title="Envío gratis" />
+                                    }
                                 </div>
                                 <div className='buy-button-container'>
                                     <button>Comprar</button>
