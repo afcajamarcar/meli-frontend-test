@@ -1,14 +1,18 @@
 import React from 'react';
 import './styles/App.scss';
-import { Route } from 'react-router-dom';
-import Results from './components/Results';
+import { Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
+import Results from './components/Results';
+import Product from './components/Product';
 
 function App() {
   return (
     <div>
       <Route component={Home} path='/' />
-      <Route component={Results} path='/items' />
+      <Switch>
+        <Route component={Results} path='/items' />
+        <Route component={Product} path='/items/:id' />
+      </Switch>
     </div>
   );
 }

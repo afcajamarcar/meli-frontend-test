@@ -29,7 +29,11 @@ function SerachBox() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (item) {
-            history.push(`/items?search=${item}`);
+            console.log('will push');
+            history.push({
+                pathname: '/items',
+                search: `?search=${item}`
+            });
         }
     }
 
