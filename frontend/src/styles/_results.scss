@@ -12,7 +12,7 @@
     background-color: $white;
     border-bottom: thin solid $meli-light-grey;
     display: grid; 
-    grid-template-columns: min-content auto;
+    grid-template-columns: min-content auto min-content;
     cursor: pointer;
 }
 
@@ -43,5 +43,12 @@
     .title-container {
         font-size: 18px; 
         padding-top: 32px;
+    }
+
+    .location {
+        font-size: 12px;
+        padding-right: 50px;
+        color: $meli-grey;
+        float: right;
     }
 }

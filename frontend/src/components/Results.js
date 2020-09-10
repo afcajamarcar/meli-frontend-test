@@ -23,10 +23,13 @@ function Results() {
         }
     }, [searchItems.response]);
 
-    const renderItem = (itemId) => {
+    const renderItem = (itemId, itemCategory) => {
         history.push({
             pathname: `/items/${itemId}`,
-            state: {categories: results.categories.join(' > ')}
+            state: {
+                categories: results.categories.join(' > '),
+                itemCategory: itemCategory
+            }
         });
     };
 
@@ -43,7 +46,7 @@ function Results() {
                         </div>
                     }
                     {results && results.items && results.items.map(item => (
-                        <div key={item.id} className='item-card' onClick={() => renderItem(item.id)}>
+                        <div key={item.id} className='item-card' onClick={() => renderItem(item.id, item.category)}>
                             <div className='left-side-card'>
                                 <img src={item.picture} alt={item.title} />
                             </div>
@@ -54,6 +57,7 @@ function Results() {
                                 {item.free_shipping &&
                                     <img src={iconShipping} alt="free_shipping" title="Envío gratis" />
                                 }
+                                <div className='location'>{item.location}</div>
                                 <div className='title-container'>
                                     {item.title}
                                 </div>
