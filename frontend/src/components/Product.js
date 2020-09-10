@@ -5,8 +5,9 @@ import { formatCurrency } from '../utils/misc/formatter';
 function Product(props) {
     const itemId = props.match.params.id;
 
-    const categories = props.location.state.categories;
-    const itemCategory = props.location.state.itemCategory;
+    const propsState = props.location.state
+    const categories = propsState && propsState.categories;
+    const itemCategory = propsState && propsState.itemCategory;
 
     const [product, setProduct] = useState({});
 
@@ -40,7 +41,7 @@ function Product(props) {
                                 <div className='product-price'>
                                     {`$${formatCurrency(product.item.price.amount, product.item.price.decimals)}`}
                                 </div>
-                                <button>comprar</button>
+                                <button>Comprar</button>
                             </div>
                         </div>
                         <div className='product-description'>
