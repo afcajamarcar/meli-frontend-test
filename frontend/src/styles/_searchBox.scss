@@ -17,6 +17,7 @@
             padding: 10px;
             border: none;
             width: 100%;
+            // avoid border appearence when input has been clicked
             &:focus {
                 outline: none;
             }

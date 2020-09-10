@@ -28,7 +28,7 @@ function Results() {
         history.push({
             pathname: `/items/${itemId}`,
             state: {
-                categories: results.categories.join(' > '),
+                categories: results.categories.join(' > '), //send categories to detailed view
                 itemCategory: itemCategory
             }
         });
