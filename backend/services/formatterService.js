@@ -2,25 +2,37 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const formatSearchResult = (data) => {
-    const categoryFilter = data.available_filters.find(filter => filter.id == 'category') ||
-        data.filters.find(filter => filter.id == 'category');
-    const categoriesNames = categoryFilter && categoryFilter.values.map(value => value.name);
-    const filteredItemsByCategory = categoryFilter.values[0] &&
-        data.results.filter(item => item.category_id == categoryFilter.values[0].id);
-    const items = filteredItemsByCategory.map(item => {
-        return {
+    const categoryFilter = data.filters.length && data.filters[0].id === 'category' 
+        ? data.filters[0]
+        : data.available_filters.length && data.available_filters[0].id === 'category' 
+        ? data.available_filters[0]
+        : [];
+
+    const categoriesNames = (categoryFilter && categoryFilter.values[0] && 
+        categoryFilter.values[0].path_from_root &&
+        categoryFilter.values[0].path_from_root.map(value => value.name)) 
+        || categoryFilter.values[0] && [categoryFilter.values[0].name];
+
+    
+    const items = [];
+    data.results.slice(0, 4).forEach(item => {
+        const itemCategory = categoryFilter.values.find(
+            category => category.id == item.category_id
+        );
+        items.push ({
             id: item.id,
             title: item.title,
             price: {
                 currency: item.currency_id,
-                amount: item.available_quantity,
-                decimals: item.price
+                amount: parseInt(item.price),
+                decimals: parseFloat((item.price % 1).toFixed(4))
             },
             picture: item.thumbnail,
             condition: item.condition,
             free_shipping: item.shipping.free_shipping,
-            category: item.category_id
-        }
+            category: itemCategory && itemCategory.name || '',
+            location: item.address.state_name
+        });
     });
     const formattedRes = {
         author: {
@@ -28,14 +40,13 @@ export const formatSearchResult = (data) => {
             lastname: process.env.AUTHOR_LASTNAME || 'Cajamarca'
         },
         categories: categoriesNames,
-        items: items.slice(0, 4)
+        items: items
     }
     return formattedRes;
 }
 
 
 export const formatItemSearchResult = (itemData, descData) => {
-
     const formattedRes = {
         author: {
             name: process.env.AUTHOR_NAME || 'Andres',
@@ -46,8 +57,8 @@ export const formatItemSearchResult = (itemData, descData) => {
             title: itemData.title,
             price: {
                 currency: itemData.currency_id,
-                amount: itemData.available_quantity,
-                decimals: itemData.price
+                amount: parseInt(itemData.price),
+                decimals: parseFloat((itemData.price % 1).toFixed(4))
             }
         },
         picture: itemData.thumbnail,
